@@ -22,7 +22,7 @@ client.on("messageCreate", function(message) {
         const msgBody = message.content.slice(prefix.length); 
         const args = msgBody.split(" ");    
         const command = args.shift().toLowerCase();     
-
+        //test
         //!create valtanhm YYYY-MM-DD HH:mm:ss
         if (command == "create"){
             let raidType = args[0]

@@ -30,9 +30,39 @@ client.on("messageCreate", function(message) {
             let ownTime = args[2]
 
             unixDateTime = moment(ownDate + " " + ownTime, 'YYYY-MM-DD HH:mm:ss').valueOf()/1000
-            message.channel.send(ownDate + ownTime + raidType + " at " + "<t:" + unixDateTime + ":F>")
+            displayDate = "<t:" + unixDateTime + ":F>"
+
+            const embedMsg = new MessageEmbed()
+                .setTitle(raidType)
+                .setAuthor(
+                    { name: message.author.tag,
+                    iconURL: message.author.avatarURL()}
+                )
+                .addFields(
+                    { name: "Date & Time: ", value: displayDate}
+                )
+                .setImage('https://gamesfuze.b-cdn.net/wp-content/uploads/2022/05/image-6-38.jpg')
+                .setFooter({ text: 'Pizza on pineapple'});
+
+            p11 = " "
+            p12 = " "     
+            p13 = " "
+            p14 = " "
+            p21 = " "
+            p22 = " "
+            p23 = " "
+            p24 = " "
+
+            field1 = "1: " + p11 + "\n" + "2: " + p12 + "\n" + "3: " + p13 + "\n" + "4: " + p14 + "\n\u200B"
+            field2 = "1: " + p21 + "\n" + "2: " + p22 + "\n" + "3: " + p23 + "\n" + "4: " + p24 + "\n\u200B"
+            
+            embedMsg.addFields(
+                { name: "Party 1: " , value: field1},
+                { name: "Party 2: " , value: field2}
+            )
+
+            message.channel.send({ embeds: [embedMsg] })
         }
-      
         if (command == "nani"){
             message.channel.send("https://tenor.com/view/stoned-cat-stoned-cat-funny-huh-gif-19222132")
         }

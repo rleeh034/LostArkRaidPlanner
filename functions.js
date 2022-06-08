@@ -5,11 +5,11 @@ function createId() {
   return crypto.randomBytes(5).toString('hex')
 }
 
-function createData(raidName, raidTime, raidId) {
+function createData(raidName, displayTime, raidId) {
   var newRaid = {   
     [raidId]: {
         "name": raidName,
-        "datetime": raidTime,
+        "datetime": displayTime,
         "party": {
             "member1": " ",
             "member2": " ",

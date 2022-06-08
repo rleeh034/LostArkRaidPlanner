@@ -34,37 +34,32 @@ client.on("messageCreate", function(message) {
         //test
         //!create valtanhm YYYY-MM-DD HH:mm:ss
         if (command == "create"){
-            let raidType = args[0]
+            let raidName = args[0]
             let ownDate = args[1]
             let ownTime = args[2]
 
+            //convert arguments to useable data
             unixDateTime = moment(ownDate + " " + ownTime, 'YYYY-MM-DD HH:mm:ss').valueOf()/1000
             displayDate = "<t:" + unixDateTime + ":F>"
             var raidId = fx.createId()
 
-            raidList.push([raidNames[raidType], displayDate, raidId,])
-
-            const embedMsg = new MessageEmbed()
-                .setTitle(raidNames[raidType])
-                .setDescription("Raid ID: " + raidId)
-                .setAuthor(
-                    { name: message.author.tag,
-                    iconURL: message.author.avatarURL()}
-                )
-                .addFields(
-                    { name: "Date & Time: ", value: displayDate}
-                )
-                .setImage('https://gamesfuze.b-cdn.net/wp-content/uploads/2022/05/image-6-38.jpg')
-                .setFooter({ text: 'Pizza on pineapple'});
-
-            field1 = "1: " + p11 + "\n" + "2: " + p12 + "\n" + "3: " + p13 + "\n" + "4: " + p14 + "\n\u200B"
-            field2 = "1: " + p21 + "\n" + "2: " + p22 + "\n" + "3: " + p23 + "\n" + "4: " + p24 + "\n\u200B"
+            //read current json data
+            rawdata = fs.readFileSync('data.json');
+            currData = JSON.parse(rawdata);
             
-            embedMsg.addFields(
-                { name: "Party 1: " , value: field1},
-                { name: "Party 2: " , value: field2}
-            )
+            //create new raid data 
+            newData = fx.createData(raidName, displayDate, raidId)
 
+            //append new data into curr data
+            combData = Object.assign(currData, newData)
+            
+            //generate embed message
+            embedMsg = fx.raidTemplate(message, raidNames[raidName], displayDate, raidId, combData)
+            
+            //rewrite combined data into json file
+            fs.writeFileSync('data.json', JSON.stringify(combData, null, 2));
+
+            //send embed message
             message.channel.send({ embeds: [embedMsg] })
         }
 
@@ -75,19 +70,27 @@ client.on("messageCreate", function(message) {
 
 
         if (command == "list"){
-
+            
+            //read current json data
+            rawdata = fs.readFileSync('data.json');
+            currData = JSON.parse(rawdata);
+            
             const embedList = new MessageEmbed()
                 .setTitle("Raid List")
 
             var nameField = "\u200B"
             var dateField = "\u200B"
             var idField = "\u200B"
- 
-            for (let i = 0; i < raidList.length; i++)
+            
+            length = Object.keys(currData).length
+            
+            //append string data of names, date and id 
+            for (let i = 0; i < length; i++)
             {   
-                nameField = nameField + raidList[i][0] + "\n"
-                dateField = dateField + raidList[i][1] + "\n"
-                idField = idField + raidList[i][2] + "\n"
+                key = Object.keys(currData)[i]
+                nameField = nameField + raidNames[currData[key].name] + "\n"
+                dateField = dateField + currData[key].datetime + "\n"
+                idField = idField + key + "\n"
             }
 
             embedList.addFields(
@@ -99,12 +102,6 @@ client.on("messageCreate", function(message) {
             message.channel.send({ embeds: [embedList] })
         }
 
-        if (command == "test"){
-            let rawdata = fs.readFileSync('test.json');
-            let test = JSON.parse(rawdata);
-            mesg = fx.raidTemplate(message, "valtanhm", "time", "id1", test)
-            message.channel.send({ embeds: [mesg] })
-        }
 });
 
 client.login(process.env.BOT_TOKEN)

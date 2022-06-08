@@ -1,15 +1,28 @@
 require("dotenv").config(); 
+var fx = require('./functions');
 
 var moment = require('moment');
 
 const {Discord, Intents, Client, MessageEmbed, CategoryChannel} = require("discord.js");
+const { raidId } = require("./functions");
 const client = new Client({
     intents: [
         Intents.FLAGS.GUILDS,
         Intents.FLAGS.GUILD_MESSAGES
     ]
 });
+
 const prefix = "!";
+
+var raidNames = { 
+    "valtannm" : "Valtan NM",
+    "valtanhm" : "Valtan HM",
+    "argosp1" : "Argos P1",
+    "argosp2" : "Argos P2",
+    "argosp3" : "Argos P3"  
+}
+
+var raidList = new Array()
 
 client.on("ready", function() {
     console.log("Connected")
@@ -31,9 +44,13 @@ client.on("messageCreate", function(message) {
 
             unixDateTime = moment(ownDate + " " + ownTime, 'YYYY-MM-DD HH:mm:ss').valueOf()/1000
             displayDate = "<t:" + unixDateTime + ":F>"
+            var raidId = fx.createId()
+
+            raidList.push([raidNames[raidType], displayDate, raidId,])
 
             const embedMsg = new MessageEmbed()
-                .setTitle(raidType)
+                .setTitle(raidNames[raidType])
+                .setDescription("Raid ID: " + raidId)
                 .setAuthor(
                     { name: message.author.tag,
                     iconURL: message.author.avatarURL()}
@@ -65,6 +82,31 @@ client.on("messageCreate", function(message) {
         }
         if (command == "nani"){
             message.channel.send("https://tenor.com/view/stoned-cat-stoned-cat-funny-huh-gif-19222132")
+        }
+
+        if (command == "list"){
+
+            const embedList = new MessageEmbed()
+                .setTitle("Raid List")
+
+            var nameField = "\u200B"
+            var dateField = "\u200B"
+            var idField = "\u200B"
+ 
+            for (let i = 0; i < raidList.length; i++)
+            {   
+                nameField = nameField + raidList[i][0] + "\n"
+                dateField = dateField + raidList[i][1] + "\n"
+                idField = idField + raidList[i][2] + "\n"
+            }
+
+            embedList.addFields(
+                { name: "Name", value: nameField, inline: true},
+                { name: "Date", value: dateField, inline: true},
+                { name: "ID", value: idField, inline: true},
+            )
+
+            message.channel.send({ embeds: [embedList] })
         }
 });
 

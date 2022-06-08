@@ -1,10 +1,8 @@
-require("dotenv").config(); 
+require("dotenv").config();
 var fx = require('./functions');
-
 var moment = require('moment');
-
+const fs = require('fs');
 const {Discord, Intents, Client, MessageEmbed, CategoryChannel} = require("discord.js");
-const { raidId } = require("./functions");
 const client = new Client({
     intents: [
         Intents.FLAGS.GUILDS,
@@ -13,7 +11,6 @@ const client = new Client({
 });
 
 const prefix = "!";
-
 var raidNames = { 
     "valtannm" : "Valtan NM",
     "valtanhm" : "Valtan HM",
@@ -21,7 +18,6 @@ var raidNames = {
     "argosp2" : "Argos P2",
     "argosp3" : "Argos P3"  
 }
-
 var raidList = new Array()
 
 client.on("ready", function() {
@@ -61,15 +57,6 @@ client.on("messageCreate", function(message) {
                 .setImage('https://gamesfuze.b-cdn.net/wp-content/uploads/2022/05/image-6-38.jpg')
                 .setFooter({ text: 'Pizza on pineapple'});
 
-            p11 = " "
-            p12 = " "     
-            p13 = " "
-            p14 = " "
-            p21 = " "
-            p22 = " "
-            p23 = " "
-            p24 = " "
-
             field1 = "1: " + p11 + "\n" + "2: " + p12 + "\n" + "3: " + p13 + "\n" + "4: " + p14 + "\n\u200B"
             field2 = "1: " + p21 + "\n" + "2: " + p22 + "\n" + "3: " + p23 + "\n" + "4: " + p24 + "\n\u200B"
             
@@ -80,9 +67,12 @@ client.on("messageCreate", function(message) {
 
             message.channel.send({ embeds: [embedMsg] })
         }
+
+
         if (command == "nani"){
             message.channel.send("https://tenor.com/view/stoned-cat-stoned-cat-funny-huh-gif-19222132")
         }
+
 
         if (command == "list"){
 
@@ -107,6 +97,13 @@ client.on("messageCreate", function(message) {
             )
 
             message.channel.send({ embeds: [embedList] })
+        }
+
+        if (command == "test"){
+            let rawdata = fs.readFileSync('test.json');
+            let test = JSON.parse(rawdata);
+            mesg = fx.raidTemplate(message, "valtanhm", "time", "id1", test)
+            message.channel.send({ embeds: [mesg] })
         }
 });
 

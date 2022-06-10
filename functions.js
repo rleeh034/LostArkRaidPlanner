@@ -1,8 +1,17 @@
 const crypto = require('crypto');
+const fs = require('fs');
 const {Discord, Intents, Client, MessageEmbed, CategoryChannel} = require("discord.js");
 
 function createId() {
   return crypto.randomBytes(5).toString('hex')
+}
+
+var raidNames = { 
+  "valtannm" : "Valtan NM",
+  "valtanhm" : "Valtan HM",
+  "argosp1" : "Argos P1",
+  "argosp2" : "Argos P2",
+  "argosp3" : "Argos P3"  
 }
 
 function createData(raidName, displayTime, raidId) {
@@ -40,7 +49,9 @@ function createId() {
   return crypto.randomBytes(5).toString('hex')
 }
 
-function raidTemplate(message, raidName, raidTime, raidId, raidData) {
+function raidTemplate(message, raidId, raidData) {
+    raidName = raidNames[raidData[raidId].name]
+    raidTime = raidData[raidId].datetime
     const embedMsg = new MessageEmbed()
         .setTitle(raidName)
         .setDescription("Raid ID: " + raidId)

@@ -41,7 +41,7 @@ client.on("messageCreate", function(message) {
             //convert arguments to useable data
             unixDateTime = moment(ownDate + " " + ownTime, 'YYYY-MM-DD HH:mm:ss').valueOf()/1000
             displayDate = "<t:" + unixDateTime + ":F>"
-            var raidId = fx.createId()
+            let raidId = fx.createId()
 
             //read current json data
             rawdata = fs.readFileSync('data.json');
@@ -54,7 +54,7 @@ client.on("messageCreate", function(message) {
             combData = Object.assign(currData, newData)
             
             //generate embed message
-            embedMsg = fx.raidTemplate(message, raidNames[raidName], displayDate, raidId, combData)
+            embedMsg = fx.raidTemplate(message, raidId, combData)
             
             //rewrite combined data into json file
             fs.writeFileSync('data.json', JSON.stringify(combData, null, 2));
@@ -67,15 +67,15 @@ client.on("messageCreate", function(message) {
         if (command == "list"){
             
             //read current json data
-            rawdata = fs.readFileSync('data.json');
-            currData = JSON.parse(rawdata);
+            rawdata = fs.readFileSync('data.json')
+            currData = JSON.parse(rawdata)
             
             const embedList = new MessageEmbed()
                 .setTitle("Raid List")
 
-            var nameField = "\u200B"
-            var dateField = "\u200B"
-            var idField = "\u200B"
+            let nameField = "\u200B"
+            let dateField = "\u200B"
+            let idField = "\u200B"
             
             length = Object.keys(currData).length
             
@@ -97,21 +97,33 @@ client.on("messageCreate", function(message) {
             message.channel.send({ embeds: [embedList] })
         }
 
+
         if (command == "join"){
-            let raidId = args[0]
+            let raidId = args[0].slice(1, 11)
             let userName = args[1]
             let userClass = args[2]
-
-            //read current json data
-            rawdata = fs.readFileSync('data.json');
-            currData = JSON.parse(rawdata);
             
-            //add user data
-            currData[raidId].party.member1 = userName
-            currData[raidId].party.class1 = userClass
+            //read current json data
+            rawdata = fs.readFileSync('data.json')
+            currData = JSON.parse(rawdata)
 
+            //add user data
+            if (currData[raidId].count < 8){
+                currData[raidId].party.member1 = userName
+                currData[raidId].class.member1 = userClass
+                currData[raidId].count += 1
+            }
+
+            else{
+                return message.channel.send("Raid is full!")
+            }
+            //generate embed message
+            embedMsg = fx.raidTemplate(message, raidId, currData)
+            
             //write data into json file
             fs.writeFileSync('data.json', JSON.stringify(currData, null, 2));
+
+            message.channel.send({ embeds: [embedMsg] })
         }
 
 });

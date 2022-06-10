@@ -10,6 +10,7 @@ function createData(raidName, displayTime, raidId) {
     [raidId]: {
         "name": raidName,
         "datetime": displayTime,
+        "count" : 0,
         "party": {
             "member1": " ",
             "member2": " ",

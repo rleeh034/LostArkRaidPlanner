@@ -31,7 +31,7 @@ client.on("messageCreate", function(message) {
         const msgBody = message.content.slice(prefix.length); 
         const args = msgBody.split(" ");    
         const command = args.shift().toLowerCase();     
-        //test
+
         //!create valtanhm YYYY-MM-DD HH:mm:ss
         if (command == "create"){
             let raidName = args[0]
@@ -64,11 +64,6 @@ client.on("messageCreate", function(message) {
         }
 
 
-        if (command == "nani"){
-            message.channel.send("https://tenor.com/view/stoned-cat-stoned-cat-funny-huh-gif-19222132")
-        }
-
-
         if (command == "list"){
             
             //read current json data
@@ -88,18 +83,35 @@ client.on("messageCreate", function(message) {
             for (let i = 0; i < length; i++)
             {   
                 key = Object.keys(currData)[i]
-                nameField = nameField + raidNames[currData[key].name] + "\n"
+                nameField = nameField + raidNames[currData[key].name] + " (" + currData[key].count + "/8)" + "\n"
                 dateField = dateField + currData[key].datetime + "\n"
                 idField = idField + key + "\n"
             }
 
             embedList.addFields(
-                { name: "Name", value: nameField, inline: true},
+                { name: "Raid (Players)", value: nameField, inline: true},
                 { name: "Date", value: dateField, inline: true},
                 { name: "ID", value: idField, inline: true},
             )
 
             message.channel.send({ embeds: [embedList] })
+        }
+
+        if (command == "join"){
+            let raidId = args[0]
+            let userName = args[1]
+            let userClass = args[2]
+
+            //read current json data
+            rawdata = fs.readFileSync('data.json');
+            currData = JSON.parse(rawdata);
+            
+            //add user data
+            currData[raidId].party.member1 = userName
+            currData[raidId].party.class1 = userClass
+
+            //write data into json file
+            fs.writeFileSync('data.json', JSON.stringify(currData, null, 2));
         }
 
 });

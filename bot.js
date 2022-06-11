@@ -118,9 +118,25 @@ client.on("messageCreate", function(message) {
             embedMsg = fx.raidTemplate(message, raidId, currData)
             
             //write data into json file
-            fs.writeFileSync('data.json', JSON.stringify(currData, null, 2));
+            fs.writeFileSync('data.json', JSON.stringify(currData, null, 2))
 
             message.channel.send({ embeds: [embedMsg] })
+        }
+
+        if (command == "delete"){
+            let raidId = args[0]
+            
+            //read current json data
+            rawdata = fs.readFileSync('data.json')  
+            currData = JSON.parse(rawdata)
+
+            //delete data
+            delete currData[raidId]
+
+            //write data into json file
+            fs.writeFileSync('data.json', JSON.stringify(currData, null, 2))
+
+            message.reply("Raid (ID: " + raidId + ") has been deleted.")
         }
 
 });

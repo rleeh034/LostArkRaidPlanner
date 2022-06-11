@@ -131,7 +131,13 @@ client.on("messageCreate", function(message) {
             currData = JSON.parse(rawdata)
 
             //delete data
-            delete currData[raidId]
+            if (raidId == "all"){
+                currData = {}
+            }
+            
+            else{
+                delete currData[raidId]
+            }
 
             //write data into json file
             fs.writeFileSync('data.json', JSON.stringify(currData, null, 2))

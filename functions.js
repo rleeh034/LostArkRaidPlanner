@@ -12,7 +12,16 @@ var raidNames = {
     "argosp1" : "Argos P1",
     "argosp2" : "Argos P2",
     "argosp3" : "Argos P3"  
-  }
+}
+
+var raidImageUrl = { 
+    "valtannm" : "https://cdn1.dotesports.com/wp-content/uploads/2022/04/05083554/image_2022-04-05_153554552.png",
+    "valtanhm" : "https://cdn1.dotesports.com/wp-content/uploads/2022/04/05083554/image_2022-04-05_153554552.png",
+    "argosp1" : "https://cdn.mos.cms.futurecdn.net/aH7EvG7MWka2hJACFFh7ei-970-80.jpg.webp",
+    "argosp2" : "https://cdn.mos.cms.futurecdn.net/aH7EvG7MWka2hJACFFh7ei-970-80.jpg.webp",
+    "argosp3" : "https://cdn.mos.cms.futurecdn.net/aH7EvG7MWka2hJACFFh7ei-970-80.jpg.webp"  
+}
+
 
 function createData(raidName, displayTime, raidId) {
     var newRaid = {   
@@ -62,7 +71,7 @@ function raidTemplate(message, raidId, raidData) {
         .addFields(
             { name: "Date & Time: ", value: raidTime}
         )
-        .setImage('https://gamesfuze.b-cdn.net/wp-content/uploads/2022/05/image-6-38.jpg')
+        .setImage(raidImageUrl[raidData[raidId].name])
         .setFooter({ text: 'Pizza on pineapple'});
 
     field1 = "1: " + raidData[raidId].party.member1 + " (" + raidData[raidId].class.member1 + ")" + "\n" 

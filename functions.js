@@ -3,46 +3,46 @@ const fs = require('fs');
 const {Discord, Intents, Client, MessageEmbed, CategoryChannel} = require("discord.js");
 
 function createId() {
-  return crypto.randomBytes(5).toString('hex')
+    return crypto.randomBytes(5).toString('hex')
 }
 
 var raidNames = { 
-  "valtannm" : "Valtan NM",
-  "valtanhm" : "Valtan HM",
-  "argosp1" : "Argos P1",
-  "argosp2" : "Argos P2",
-  "argosp3" : "Argos P3"  
-}
+    "valtannm" : "Valtan NM",
+    "valtanhm" : "Valtan HM",
+    "argosp1" : "Argos P1",
+    "argosp2" : "Argos P2",
+    "argosp3" : "Argos P3"  
+  }
 
 function createData(raidName, displayTime, raidId) {
-  var newRaid = {   
-    [raidId]: {
-        "name": raidName,
-        "datetime": displayTime,
-        "count" : 0,
-        "party": {
-            "member1": " ",
-            "member2": " ",
-            "member3": " ",
-            "member4": " ",
-            "member5": " ",
-            "member6": " ",
-            "member7": " ",
-            "member8": " "
-        },
-        "class": {
-            "member1": " ",
-            "member2": " ",
-            "member3": " ",
-            "member4": " ",
-            "member5": " ",
-            "member6": " ",
-            "member7": " ",
-            "member8": " "
-        }       
+    var newRaid = {   
+      [raidId]: {
+          "name": raidName,
+          "datetime": displayTime,
+          "count" : 0,
+          "party": {
+              "member1": " ",
+              "member2": " ",
+              "member3": " ",
+              "member4": " ",
+              "member5": " ",
+              "member6": " ",
+              "member7": " ",
+              "member8": " "
+          },
+          "class": {
+              "member1": " ",
+              "member2": " ",
+              "member3": " ",
+              "member4": " ",
+              "member5": " ",
+              "member6": " ",
+              "member7": " ",
+              "member8": " "
+          }       
+      }
     }
-  }
-  return newRaid
+    return newRaid
 }
 
 function createId() {
@@ -81,7 +81,32 @@ function raidTemplate(message, raidId, raidData) {
     return embedMsg
 }
 
+function joinRaid(userName, userGameClass, raidId, raidData) {
+    classData = Object.values(raidData[raidId].class)
+    partyData = Object.values(raidData[raidId].party)
+    
+    classArray = classData.slice(0, raidData[raidId].count)
+    partyArray = partyData.slice(0, raidData[raidId].count)
+    
+    classArray.push(userGameClass)
+    partyArray.push(userName)
+    
+    raidData[raidId].count += 1
+    
+    for (i = 0; i < 8 - raidData[raidId].count; i++){
+        classArray.push(" ")
+        partyArray.push(" ")
+    }
+
+    let tempCount = 0
+    for (keys in raidData[raidId].class) {
+        raidData[raidId].class[keys] = classArray[tempCount]
+        raidData[raidId].party[keys] = partyArray[tempCount]
+        tempCount += 1
+    }
+
+    return raidData
+}
 
 
-
-module.exports = { createId, createData, raidTemplate};
+module.exports = { createId, createData, raidTemplate, joinRaid};

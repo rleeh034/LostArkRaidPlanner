@@ -99,24 +99,21 @@ client.on("messageCreate", function(message) {
 
 
         if (command == "join"){
-            let raidId = args[0].slice(1, 11)
+            let raidId = args[0]
             let userName = args[1]
-            let userClass = args[2]
+            let userGameClass = args[2]
             
             //read current json data
             rawdata = fs.readFileSync('data.json')
             currData = JSON.parse(rawdata)
-
             //add user data
             if (currData[raidId].count < 8){
-                currData[raidId].party.member1 = userName
-                currData[raidId].class.member1 = userClass
-                currData[raidId].count += 1
+                currData = fx.joinRaid(userName, userGameClass, raidId, currData)
             }
-
             else{
                 return message.channel.send("Raid is full!")
             }
+
             //generate embed message
             embedMsg = fx.raidTemplate(message, raidId, currData)
             

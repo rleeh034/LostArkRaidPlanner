@@ -1,10 +1,10 @@
 {
-  "c3eabc4bac": {
+  "f0ba2b3034": {
     "name": "valtanhm",
     "datetime": "<t:1667718000:F>",
     "count": 1,
     "party": {
-      "member1": "mijumaru",
+      "member1": "dog",
       "member2": " ",
       "member3": " ",
       "member4": " ",
@@ -24,32 +24,7 @@
       "member8": " "
     }
   },
-  "f0fe042be4": {
-    "name": "valtanhm",
-    "datetime": "<t:1667718000:F>",
-    "count": 0,
-    "party": {
-      "member1": " ",
-      "member2": " ",
-      "member3": " ",
-      "member4": " ",
-      "member5": " ",
-      "member6": " ",
-      "member7": " ",
-      "member8": " "
-    },
-    "class": {
-      "member1": " ",
-      "member2": " ",
-      "member3": " ",
-      "member4": " ",
-      "member5": " ",
-      "member6": " ",
-      "member7": " ",
-      "member8": " "
-    }
-  },
-  "e23f501427": {
+  "f045366d34": {
     "name": "valtanhm",
     "datetime": "<t:1667718000:F>",
     "count": 0,

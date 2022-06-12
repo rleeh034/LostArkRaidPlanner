@@ -124,7 +124,7 @@ client.on("messageCreate", function(message) {
             message.channel.send({ embeds: [embedMsg] })
         }
 
-        
+
         if (command == "leave"){
             let raidId = args[0]
             let userName = args[1]
@@ -170,6 +170,20 @@ client.on("messageCreate", function(message) {
             fs.writeFileSync('data.json', JSON.stringify(currData, null, 2))
 
             message.reply("Raid (ID: " + raidId + ") has been deleted.")
+        }
+
+        
+        if (command == "show"){
+            let raidId = args[0]
+            
+            //read current json data
+            rawdata = fs.readFileSync('data.json')  
+            currData = JSON.parse(rawdata)
+
+            //generate embed message
+            embedMsg = fx.raidTemplate(message, raidId, currData)
+
+            message.channel.send({ embeds: [embedMsg] })
         }
 
 });

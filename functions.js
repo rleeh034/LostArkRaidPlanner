@@ -2,10 +2,6 @@ const crypto = require('crypto');
 const fs = require('fs');
 const {Discord, Intents, Client, MessageEmbed, CategoryChannel} = require("discord.js");
 
-function createId() {
-    return crypto.randomBytes(5).toString('hex')
-}
-
 var raidNames = { 
     "valtannm" : "Valtan NM",
     "valtanhm" : "Valtan HM",
@@ -22,7 +18,7 @@ var raidImageUrl = {
     "argosp3" : "https://cdn.mos.cms.futurecdn.net/aH7EvG7MWka2hJACFFh7ei-970-80.jpg.webp"  
 }
 
-
+//json template
 function createData(raidName, displayTime, raidId) {
     var newRaid = {   
       [raidId]: {
@@ -54,10 +50,12 @@ function createData(raidName, displayTime, raidId) {
     return newRaid
 }
 
+//create raid id
 function createId() {
   return crypto.randomBytes(5).toString('hex')
 }
 
+//generate embed template
 function raidTemplate(message, raidId, raidData) {
     raidName = raidNames[raidData[raidId].name]
     raidTime = raidData[raidId].datetime
@@ -90,6 +88,7 @@ function raidTemplate(message, raidId, raidData) {
     return embedMsg
 }
 
+//general function to edit raid list
 function editRaid(joinleave, userName, userGameClass, raidId, raidData) {
     classData = Object.values(raidData[raidId].class)
     partyData = Object.values(raidData[raidId].party)

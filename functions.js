@@ -90,17 +90,24 @@ function raidTemplate(message, raidId, raidData) {
     return embedMsg
 }
 
-function joinRaid(userName, userGameClass, raidId, raidData) {
+function editRaid(joinleave, userName, userGameClass, raidId, raidData) {
     classData = Object.values(raidData[raidId].class)
     partyData = Object.values(raidData[raidId].party)
     
     classArray = classData.slice(0, raidData[raidId].count)
     partyArray = partyData.slice(0, raidData[raidId].count)
     
-    classArray.push(userGameClass)
-    partyArray.push(userName)
-    
-    raidData[raidId].count += 1
+    if (joinleave == "join"){
+        classArray.push(userGameClass)
+        partyArray.push(userName)
+        raidData[raidId].count += 1
+    }
+    else if (joinleave == "leave"){
+        let index = partyArray.indexOf(userName)
+        classArray.splice(index, 1)
+        partyArray.splice(index, 1)     
+        raidData[raidId].count -= 1
+    }
     
     for (i = 0; i < 8 - raidData[raidId].count; i++){
         classArray.push(" ")
@@ -118,4 +125,4 @@ function joinRaid(userName, userGameClass, raidId, raidData) {
 }
 
 
-module.exports = { createId, createData, raidTemplate, joinRaid};
+module.exports = { createId, createData, raidTemplate, editRaid};

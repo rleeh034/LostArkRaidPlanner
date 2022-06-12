@@ -106,12 +106,39 @@ client.on("messageCreate", function(message) {
             //read current json data
             rawdata = fs.readFileSync('data.json')
             currData = JSON.parse(rawdata)
+
             //add user data
             if (currData[raidId].count < 8){
-                currData = fx.joinRaid(userName, userGameClass, raidId, currData)
+                currData = fx.editRaid("join", userName, userGameClass, raidId, currData)
             }
             else{
                 return message.channel.send("Raid is full!")
+            }
+
+            //generate embed message
+            embedMsg = fx.raidTemplate(message, raidId, currData)
+            
+            //write data into json file
+            fs.writeFileSync('data.json', JSON.stringify(currData, null, 2))
+
+            message.channel.send({ embeds: [embedMsg] })
+        }
+
+        
+        if (command == "leave"){
+            let raidId = args[0]
+            let userName = args[1]
+            
+            //read current json data
+            rawdata = fs.readFileSync('data.json')
+            currData = JSON.parse(rawdata)
+
+            //add user data
+            if (currData[raidId].count > 0){
+                currData = fx.editRaid("leave", userName, " ", raidId, currData)
+            }
+            else{
+                return message.channel.send("Raid is empty!")
             }
 
             //generate embed message

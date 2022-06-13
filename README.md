@@ -45,38 +45,28 @@ If successful the console log will show 'Connected' and the status of the bot sh
 
 #### Create raid event
 
+List of *raidType*:
+
+Valtan Hard Mode: *valtanhm*
+Valtan Normal Mode: *valtannm*
+Argos Phase 1: *argosp1*
+Argos Phase 2: *argosp2*
+Argos Phase 3: *argosp3*
+
 ```
 !create <raidType> <YYYY:MM:DD> <HH:MM:ss>
 ```
 
-Example:
 ![image](https://user-images.githubusercontent.com/103243606/173298675-09537421-2f48-4687-b161-ad5ee09c0eeb.png)
 
-#### Join raid event
-
-```
-!join <raidId> <gameName> <gameRole>
-```
-
-Example:
-![image](https://user-images.githubusercontent.com/103243606/173299453-9b33f9dd-e630-4a67-b6f6-bdb6b66b201e.png)
-
-#### Leave raid event
-
-```
-!leave <raidId> <gameName>
-```
-
-Example:
-![image](https://user-images.githubusercontent.com/103243606/173299606-da2b11d2-4f69-433f-8b49-af3cfb53b770.png)
-
 #### List raid events
+
+*raidId* can be obtained here
 
 ```
 !list
 ```
 
-Example:
 ![image](https://user-images.githubusercontent.com/103243606/173299686-b74faf15-02f7-4282-8b66-6412f7220d49.png)
 
 #### Show raid event
@@ -85,7 +75,6 @@ Example:
 !show <raidId>
 ```
 
-Example:
 ![image](https://user-images.githubusercontent.com/103243606/173299822-a8fd9b7c-d00d-416e-8cc5-210a4be3ecd9.png)
 
 #### Delete raid event
@@ -94,6 +83,20 @@ Example:
 !delete <raidId>
 ```
 
-Example:
 ![image](https://user-images.githubusercontent.com/103243606/173299920-4e6abc30-9cef-425f-9747-72a2e5db3aa7.png)
 
+#### Join raid event
+
+```
+!join <raidId> <gameName> <gameRole>
+```
+
+![image](https://user-images.githubusercontent.com/103243606/173299453-9b33f9dd-e630-4a67-b6f6-bdb6b66b201e.png)
+
+#### Leave raid event
+
+```
+!leave <raidId> <gameName>
+```
+
+![image](https://user-images.githubusercontent.com/103243606/173299606-da2b11d2-4f69-433f-8b49-af3cfb53b770.png)

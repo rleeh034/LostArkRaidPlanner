@@ -45,14 +45,6 @@ If successful the console log will show 'Connected' and the status of the bot sh
 
 #### Create raid event
 
-List of *raidType*:
-
-Valtan Hard Mode: *valtanhm*
-Valtan Normal Mode: *valtannm*
-Argos Phase 1: *argosp1*
-Argos Phase 2: *argosp2*
-Argos Phase 3: *argosp3*
-
 ```
 !create <raidType> <YYYY:MM:DD> <HH:MM:ss>
 ```

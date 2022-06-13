@@ -184,7 +184,20 @@ client.on("messageCreate", function(message) {
 
             message.channel.send({ embeds: [embedMsg] })
         }
+   
+        if (command == "help"){
+            message.channel.send(`
+These are the supported commands:
 
+**!help** - Help menu
+**!create <raidType> <YYYY:MM:DD> <HH:MM:ss>** - Create raid event
+**!list** - List raid event and their respective raidId
+**!show <raidId>** - Show raid event
+**!join <raidId> <gameName> <gameRole>** - Join a raid event
+**!leave <raidId> <gameName>** - Leave a raid event
+**!delete <raidId>** - Delete a raid event
+            `)
+        }
 });
 
 client.login(process.env.BOT_TOKEN)

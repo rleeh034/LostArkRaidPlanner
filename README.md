@@ -6,7 +6,7 @@ Discord Bot to plan and organize Lost Ark ingame raids.
 
 ### Prerequisites
 
-Node.js is required and can be downloaded from the official website: https://nodejs.org/en/download/
+Node.js is required and can be downloaded from the official website [here](https://nodejs.org/en/download/).
 
 The additional libraries required can be installed in the terminal via the command lines below:
 
@@ -21,7 +21,7 @@ npm install moment
 
 ### Creating the Bot
 
-Create a new application from the Discord Developer Portal (https://discord.com/developers/applications) and invite the bot to the required Discord server.
+Create a new application from the [Discord Developer Portal](https://discord.com/developers/applications) and invite the bot to the required Discord server.
 
 Generate and insert the bot token into the .env file. 
 
@@ -38,3 +38,17 @@ node bot.js
 ```
 
 If successful the console log will show 'Connected' and the status of the bot should be shown as 'Online' in the Discord server.
+
+![image](https://user-images.githubusercontent.com/103243606/173297805-bd20182e-1419-4b26-a6ad-82c28ca5f2b5.png)
+
+## Usage
+
+Run the command below to start the bot.
+
+```
+node bot.js
+```
+
+If successful the console log will show 'Connected' and the status of the bot should be shown as 'Online' in the Discord server.
+
+![image](https://user-images.githubusercontent.com/103243606/173297805-bd20182e-1419-4b26-a6ad-82c28ca5f2b5.png)

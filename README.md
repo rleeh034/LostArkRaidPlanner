@@ -92,3 +92,11 @@ If successful the console log will show 'Connected' and the status of the bot sh
 ```
 
 ![image](https://user-images.githubusercontent.com/103243606/173299606-da2b11d2-4f69-433f-8b49-af3cfb53b770.png)
+
+#### Help
+
+To view all available commands and required arguments
+
+```
+!help
+```

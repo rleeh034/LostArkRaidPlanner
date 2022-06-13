@@ -18,7 +18,6 @@ var raidNames = {
     "argosp2" : "Argos P2",
     "argosp3" : "Argos P3"  
 }
-var raidList = new Array()
 
 client.on("ready", function() {
     console.log("Connected")

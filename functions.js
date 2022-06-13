@@ -11,11 +11,11 @@ var raidNames = {
 }
 
 var raidImageUrl = { 
-    "valtannm" : "https://cdn1.dotesports.com/wp-content/uploads/2022/04/05083554/image_2022-04-05_153554552.png",
-    "valtanhm" : "https://cdn1.dotesports.com/wp-content/uploads/2022/04/05083554/image_2022-04-05_153554552.png",
-    "argosp1" : "https://cdn.mos.cms.futurecdn.net/aH7EvG7MWka2hJACFFh7ei-970-80.jpg.webp",
-    "argosp2" : "https://cdn.mos.cms.futurecdn.net/aH7EvG7MWka2hJACFFh7ei-970-80.jpg.webp",
-    "argosp3" : "https://cdn.mos.cms.futurecdn.net/aH7EvG7MWka2hJACFFh7ei-970-80.jpg.webp"  
+    "valtannm" : "https://images.ctfassets.net/umhrp0op95v1/59ANV8Y1vC75lMI7UQvAbu/df0b4047580e6839a9818cbaa53b5d75/episode_Valtan_08_740x416.jpg",
+    "valtanhm" : "https://images.ctfassets.net/umhrp0op95v1/59ANV8Y1vC75lMI7UQvAbu/df0b4047580e6839a9818cbaa53b5d75/episode_Valtan_08_740x416.jpg",
+    "argosp1" : "https://images.ctfassets.net/umhrp0op95v1/5v2TFYLVPOvbVOD2KIzn9u/1aed88002d0a672ad015a498b9925b1f/Argos_Main_Art_740x416.jpg",
+    "argosp2" : "https://images.ctfassets.net/umhrp0op95v1/5v2TFYLVPOvbVOD2KIzn9u/1aed88002d0a672ad015a498b9925b1f/Argos_Main_Art_740x416.jpg",
+    "argosp3" : "https://images.ctfassets.net/umhrp0op95v1/5v2TFYLVPOvbVOD2KIzn9u/1aed88002d0a672ad015a498b9925b1f/Argos_Main_Art_740x416.jpg"  
 }
 
 //json template
@@ -70,7 +70,7 @@ function raidTemplate(message, raidId, raidData) {
             { name: "Date & Time: ", value: raidTime}
         )
         .setImage(raidImageUrl[raidData[raidId].name])
-        .setFooter({ text: 'Pizza on pineapple'});
+        .setFooter({ text: 'Testing'});
 
     field1 = "1: " + raidData[raidId].party.member1 + " (" + raidData[raidId].class.member1 + ")" + "\n" 
               + "2: " + raidData[raidId].party.member2 + " (" + raidData[raidId].class.member2 + ")" + "\n"

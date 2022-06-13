@@ -1,6 +1,6 @@
 # LostArkRaidPlanner
 
-Work in progress Discord Bot to plan and organize Lost Ark ingame raids.
+Discord Bot to plan and organize Lost Ark ingame raids (WIP)
 
 ## Getting Started
 

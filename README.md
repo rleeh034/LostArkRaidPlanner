@@ -1,6 +1,7 @@
 # LostArkRaidPlanner
 
-Discord Bot to plan and organize Lost Ark ingame raids (WIP)
+A Discord Bot to plan and organize ingame events known as raids in the game Lost Ark.
+
 
 ## Getting Started
 
